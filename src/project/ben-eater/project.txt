@@ -1,0 +1,9 @@
+[Overview]
+Name = Ben Eater Processor
+Version = 1.0.0
+
+[Hardware]
+MaxAddressBit = 9
+
+[Description]
+Based on Ben Eaters original implementation

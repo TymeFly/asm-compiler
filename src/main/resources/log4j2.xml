@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="EEPROM-Builder" packages="com.github.tymefly.eeprom.builder">
+    <Appenders>
+        <Console name="stdout" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%6p] %d{yyyy-MM-dd HH:mm:ss} - %m%n"/>
+        </Console>
+
+        <File name="fout" fileName="${sys:target.dir}/out.log" append="false">
+            <PatternLayout pattern="[%6p] %d{yyyy-MM-dd HH:mm:ss} - %m%n"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="stdout" level="info"/>
+            <AppenderRef ref="fout"/>
+        </Root>
+    </Loggers>
+</Configuration>

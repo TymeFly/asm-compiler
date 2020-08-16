@@ -1,0 +1,57 @@
+// See https://github.com/beneater/eeprom-programmer/blob/master/microcode-eeprom-with-flags/microcode-eeprom-with-flags.ino
+// Unlike Ben's original design this compiler will generate a different file for each EEPROM
+
+[fetch]
+    CO  MI
+    RO  II  CE
+
+[NOP]
+IR  0000 xxxx
+
+[LDA]
+IR  0001 xxxx
+    IO  MI
+    RO  AI
+
+[ADD]
+IR  0010 xxxx
+    IO  MI
+    RO  BI
+    EO  AI  FI
+
+[SUB]
+IR  0011 xxxx
+    IO  MI
+    RO  BI
+    EO  AI  SU  FI
+
+[STA]
+IR  0100 xxxx
+    IO  MI
+    AO  RI
+
+[LDI]
+IR  0101 xxxx
+    IO  AI
+
+[JMP]
+IR  0110 xxxx
+    IO  J
+
+[JC]
+IR  0111 xxxx
+cf  1
+    IO  J
+
+[JZ]
+IR  1000 xxxx
+z   1
+    IO  J
+
+[OUT]
+IR  1110 xxxx
+    AO  OI
+
+[HLT]
+IR  1111 xxxx
+    HLT

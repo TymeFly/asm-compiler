@@ -1,0 +1,12 @@
+// The Project file is used to define project wide constants
+
+
+[Overview]                      // The Overview section describe the project
+Name = Template                     // The name of the project - this will be recorded in the srec file for the ROM(s)
+Version = 1.0.0                     // The version of the project - this will be recorded in the srec file for the ROM(s)
+
+[Hardware]
+MaxAddressBit = 8                   // Highest valid address bit (the lowest address bit is A0)
+
+[Description]
+Template application            // Any additional information that needs to be added to the srec file

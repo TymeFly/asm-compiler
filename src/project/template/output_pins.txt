@@ -1,0 +1,29 @@
+// This file is used to to describe the wiring of the Data Lines from each of the EEPROMs
+//
+// Each group represents a single EEPROM in the system.
+// The compiler can generate images for up to 8 EEPROMs (ROM_1 -> ROM_8) each of which cah have 8 data bits
+//
+// The format of this file is:
+// [rom-name]
+// pin-name     data-bit
+
+
+[ROM_1]
+AO          0
+AI          1
+II          2
+IO          3
+RO          4
+RI          5
+MI          6
+/HLT        7               // In this example HLT prefixed with a '/' to say it's normally high and active low
+
+[ROM_2]
+FI          0
+J           1
+CO          2
+CE          3
+OI          4
+BI          5
+SU          6
+EO          7

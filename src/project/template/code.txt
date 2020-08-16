@@ -1,0 +1,57 @@
+// This file is used to describe what the processor will do on each tick of the system clock.
+//
+// There are 3 states that are considered:
+// - The content of the Instruction Register
+// - The state of the flags
+// - The value of the MCycle counter
+// These are all defined in the input_pins.txt file
+//
+// The file contains a named section for each instruction
+// In addition there are 3 special sections: 'fetch', 'final' and '*'.
+// The 'fetch' section is required; 'final' and '*' are optional and will default to do nothing.
+//
+// The format of this file is:
+// [section]
+// condition-name    condition-value         // Multiple conditions are supported
+//     OUT-PIN-1 OUT-PIN-2 OUT-PIN-3...      // Output pins asserted in this Cycle (these are defined in output_pins.txt)
+//     OUT-PIN-4 OUT-PIN-5...                // Output pins for the next cycle
+//
+// The conditions for the instruction must be unique - this is normally done by defining unique OpCodes (IR values)
+// for each instruction. However, it's possible to define two instructions that share the same OpCode but are
+// differentiated by flags. This could be useful if you need to create an instruction that performs a different or
+// truncated action in certain conditions. For example you might want to create an instructions that decrements a
+// register and them jumps if the result is not zero.
+//
+// Finally, if an instruction is defined that is dependent on particular set of flags, then the compiler will
+// automatically generate a 'no-op' instruction for the undefined flags states.
+// For example, if you can define a 'Jump' instruction that is only executed if the zero flag is set and the compiler
+// will automatically generate the 'no-op' instruction that will be executed if the zero flag is not set.
+
+
+[fetch]                 // Required section to define the fetch cycle
+    CO  MI              // Action: (Cycle 0) These are performed before the Instruction register is loaded
+    RO  II  CE          // Action: (Cycle 1) There must be no conditions (flags or OpCode) in this section
+
+
+[final]                 // Optional section to define common termination steps
+                        // This could be used to reset the MCycle counter
+                        // The first of these steps is performed at the same time as the last step in the instruction
+                        //    - If the step should be afterward then start this section with '-' (do nothing)
+                        // There must be no conditions (flags or OpCode) in this section
+
+[*]                     // Optional section to define actions taken by all unused instruction
+                        // This could be used to halt the processor and/or light a warning LED on an illegal instruction
+                        // These actions will be performed after the fetch cycle and alongside the final section
+                        // There must be no conditions (flags or OpCode) in this section
+
+
+[NOP]                   // User defined instruction called 'NOP'
+IR  0000 xxxx               // Condition: Top 4 bits of IR are all 0; 'x' indicates lower bits are not considered
+    -                       // Action:    '-' is used as a 'do nothing in this cycle' step
+
+
+[JZ]                    // User defined instruction called 'JZ'
+IR  1000 xxxx               // Condition: Top 4 bits of IR are the value 8; 'x' indicates lower bits are not considered
+z   1                       // Condition: This definition is only executed if 'z' flag is set
+    IO  J                   // Action: This is performed after the fetch cycle has been completed
+                            //         In this example 'fetch' takes 2 cycle 0 and 1 this this is Cycle 2

@@ -1,0 +1,19 @@
+[ROM_1]
+AO          0
+AI          1
+II          2
+IO          3
+RO          4
+RI          5
+MI          6
+HLT         7
+
+[ROM_2]
+FI          0
+J           1
+CO          2
+CE          3
+OI          4
+BI          5
+SU          6
+EO          7

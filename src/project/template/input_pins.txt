@@ -1,0 +1,27 @@
+// This file is used to to describe the wiring of the Address Lines that are common to all EEPROMs
+//
+// There are 3 groups - M_CYCLE, IR (Instruction Register) and FLAG, all of which are required
+//
+// UPPER_CASE_NAMES are predefined names
+// lower_case_names are user defined - in this case they are reserved for defining the flags
+//
+// The format of this file is:
+// [section-name]
+// pin-name     address-bit
+
+
+[M_CYCLE]                           // Machine Cycle Counter
+M0          0                               // Up to 8 counter bits can be assigned (M0 -> M7)
+M1          1                               // The lowest bit must be called M0
+M2          2                               // The bits must be contiguous
+
+[IR]                                // Instruction Register
+IR_4        3                               // Any of the 8 Instruction Register bits (IR_0 -> IR_7) can be assigned
+IR_5        4                               // There is no requirement the bits be contiguous
+IR_6        5
+IR_7        6
+
+[FLAG]                              // Flags Register
+cf          7                               // flag name are user defined
+z           8
+

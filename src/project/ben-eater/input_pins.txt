@@ -1,0 +1,18 @@
+// In the original design Pin A7 is used to select EEPROMs
+// The compiler doesn't use that pin, so we'll ignore it here
+
+[M_CYCLE]                                   // Machine Cycle Counter
+M0          0
+M1          1
+M2          2
+
+[IR]                                        // Instruction Register
+IR_4        3
+IR_5        4
+IR_6        5
+IR_7        6
+
+[FLAG]                                      // Flags Register
+cf          8
+z           9
+
